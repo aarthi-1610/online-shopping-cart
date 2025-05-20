@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Online Shop</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0cd2f0 0%, #f70cd0 100%);
+      color: #f7f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(7, 7, 7, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #f7f0f0;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #00000030;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0 12px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: #fff;
+      color: #6a11cb;
+      transform: translateY(-2px);
+    }
+
+    section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px #00000030;
+    }
+
+    section p {
+      font-size: 1.3rem;
+      color: #f0f0f0;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 0.95rem;
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛒 Welcome to Online Shop!</h1>
+    <nav>
+      <a href="signup.html">Sign Up</a>
+      <a href="login.html">Login</a>
+      <a href="products.html">Products</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Shop the Best Products Online</h2>
+    <p>Discover stylish picks, unbeatable prices, and a seamless shopping experience - all in one place. Your next favorite find is just a click away!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 E-commerce Company. All rights reserved.</p>
+  </footer>
+</body>
+</html>

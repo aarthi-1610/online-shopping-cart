@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Creative Online Shop - Products</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    nav a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .product {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 24px rgba(0,0,0,0.08);
+    }
+    .product img {
+      max-width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .product h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #444;
+    }
+    .product p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: #666;
+    }
+    .product button {
+      background: linear-gradient(135deg, #47a8ee 0%, #de2fde 100%);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    }
+    .product button:hover {
+      background: linear-gradient(135deg, #65ace7 0%, #f06aee 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #777;
+      background: #fafafa;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Creative Online Shop</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart</a>
+      <a href="order.html">Order</a>
+    </nav>
+  </header>
+
+  <section id="product-display" class="container">
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/61kWB+uzR2L.SL1500.jpg" alt="Stylish Headphones" />
+      <h3>Stylish Headphones</h3>
+      <p>₹1,750.00</p>
+      <button onclick="addToCart('Stylish Headphones', 1750)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/71tpxtLD0aL.SX679.jpg" alt="Smartphone" />
+      <h3>Smartphone</h3>
+      <p>₹13,999.00</p>
+      <button onclick="addToCart('Smartphone', 13999)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://tse4.mm.bing.net/th?id=OIP.ME7w8biTCoGCGAD20L1S6wHaHX&pid=Api&P=0&h=180" alt="Bluetooth Speaker" />
+      <h3>Bluetooth Speaker</h3>
+      <p>₹2,599.00</p>
+      <button onclick="addToCart('Bluetooth Speaker', 2599)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://tse4.mm.bing.net/th?id=OIP.dDwkMWmWaTUsCfEjnVEsmwAAAA&pid=Api&P=0&h=180" alt="Wireless Mouse" />
+      <h3>Wireless Mouse</h3>
+      <p>₹499.00</p>
+      <button onclick="addToCart('Wireless Mouse', 499)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://tse2.mm.bing.net/th?id=OIP.3sAQPYop3baR5jYTr943ngHaGp&pid=Api&P=0&h=180" alt="Backpack" />
+      <h3>Casual Backpack</h3>
+      <p>₹1,299.00</p>
+      <button onclick="addToCart('Casual Backpack', 1299)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://theslenderwrist.com/wp-content/uploads/mens-watches-for-small-wrists.jpg" alt="Wrist Watch" />
+      <h3>Wrist Watch</h3>
+      <p>₹1,049.00</p>
+      <button onclick="addToCart('Wrist Watch', 1049)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://notebookspec.com/storage/notebook/12288-f.jpg" alt="Laptop" />
+      <h3>Gaming Laptop</h3>
+      <p>₹54,999.00</p>
+      <button onclick="addToCart('Gaming Laptop', 54999)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://tse4.mm.bing.net/th?id=OIP.mcOMadIE8dxdP6aQZyDFSwHaFj&pid=Api&P=0&h=180" alt="Smart Watch" />
+      <h3>Smart Watch</h3>
+      <p>₹2,199.00</p>
+      <button onclick="addToCart('Smart Watch', 2199)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/31KjFz+ym1L.AC.jpg" alt="LED Bulb Set" />
+      <h3>LED Bulb Set</h3>
+      <p>₹399.00</p>
+      <button onclick="addToCart('LED Bulb Set', 399)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://tse1.mm.bing.net/th?id=OIP.6uyLWpaDBHZB0AOyw_ehvQHaFP&pid=Api&P=0&h=180" alt="Printer" />
+      <h3>Printer</h3>
+      <p>₹5,749.00</p>
+      <button onclick="addToCart('Printer', 5749)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://tse1.mm.bing.net/th?id=OIP.sUWm0Apm4NN3uE2o92_jLQHaGc&pid=Api&P=0&h=180" alt="Kitchen Set" />
+      <h3>Non-Stick Kitchen Set</h3>
+      <p>₹1,899.00</p>
+      <button onclick="addToCart('Non-Stick Kitchen Set', 1899)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/51KzANObK9S.jpg" alt="Remote Car" />
+      <h3>Remote Car</h3>
+      <p>₹849.00</p>
+      <button onclick="addToCart('Remote Car', 849)">Add to Cart</button>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Creative Online Shop
+  </footer>
+
+  <script>
+    function addToCart(name, price) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+      window.location.href = "cart.html";
+    }
+  </script>
+</body>
+</html>

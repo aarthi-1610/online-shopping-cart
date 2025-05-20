@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Creative Online Shop - Order</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      color: #fff;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    nav a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.3);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.6);
+      transform: translateY(-2px);
+    }
+
+    .order {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .order h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    #order-summary {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    .order ul {
+      padding-left: 0;
+      margin: 0 auto;
+      max-width: 400px;
+      text-align: left;
+    }
+
+    .order ul li {
+      background: #f7f7f7;
+      margin: 6px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      font-size: 1rem;
+    }
+
+    .order p strong {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #222;
+    }
+
+    .btn-order {
+      background: linear-gradient(135deg, #42b0e2 0%, #f03cfa 100%);
+      border: none;
+      color: #fff;
+      padding: 12px 28px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-order:hover {
+      background: linear-gradient(135deg, #e72bc4 0%, #fe5196 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    #order-status {
+      font-size: 1.4rem;
+      margin-top: 25px;
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 40px;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Creative Online Shop</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <section class="order">
+    <h2>Order Summary</h2>
+    <div id="order-summary">Loading your order...</div>
+    <button class="btn-order" id="orderBtn" onclick="placeOrder()">Place Order</button>
+    <p id="order-status"></p>
+  </section>
+
+  <canvas id="confetti"></canvas>
+
+  <footer>
+    &copy; 2025 Creative Online Shop
+  </footer>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const summaryDiv = document.getElementById("order-summary");
+    const orderButton = document.getElementById("orderBtn");
+
+    if (cart.length === 0) {
+      summaryDiv.innerHTML = "<p>Your cart is empty. Add some products first!</p>";
+      orderButton.style.display = "none";
+    } else {
+      let summaryHTML = "<ul>";
+      let total = 0;
+      cart.forEach(item => {
+        summaryHTML += `<li>${item.name} - ₹${item.price}</li>`;
+        total += item.price;
+      });
+      summaryHTML += `</ul><p><strong>Total: ₹${total}</strong></p>`;
+      summaryDiv.innerHTML = summaryHTML;
+    }
+
+    function placeOrder() {
+      document.getElementById("order-status").textContent = "🎉 Order placed successfully!";
+      startConfetti();
+      localStorage.removeItem("cart");
+      orderButton.disabled = true;
+      orderButton.style.opacity = "0.5";
+    }
+
+    function startConfetti() {
+      const canvas = document.getElementById("confetti");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const rect = orderButton.getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+
+      const shapes = ['paper', 'bubble'];
+      const particles = [];
+      const duration = 60000;
+      const startTime = Date.now();
+
+      for (let i = 0; i < 300; i++) {
+        const angle = Math.random() * 2 * Math.PI;
+        const speed = Math.random() * 6 + 2;
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        particles.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: shape === 'paper' ? Math.random() * 14 + 6 : Math.random() * 20 + 10,
+          color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+          angle: Math.random() * 360,
+          rotateSpeed: (Math.random() - 0.5) * 10,
+          opacity: Math.random() * 0.5 + 0.5,
+          shape: shape,
+        });
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, idx) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.1;
+          p.angle += p.rotateSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.angle * Math.PI) / 180);
+          ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = p.color;
+
+          if (p.shape === 'paper') {
+            ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+          } else if (p.shape === 'bubble') {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          ctx.restore();
+
+          if (p.y > canvas.height + 50 || p.x < -100 || p.x > canvas.width + 100) {
+            particles.splice(idx, 1);
+          }
+        });
+
+        if (Date.now() - startTime < duration) {
+          requestAnimationFrame(update);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      update();
+    }
+
+    window.addEventListener("resize", () => {
+      const canvas = document.getElementById("confetti");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>

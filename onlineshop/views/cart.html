@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart - Creative Online Shop</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.2);
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .cart-header,
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr 100px 100px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    .cart-header {
+      font-weight: bold;
+      border-bottom: 2px solid #aaa;
+    }
+    .cart-item:last-of-type {
+      border-bottom: none;
+    }
+    .cart-item span {
+      font-size: 1rem;
+      padding: 5px;
+    }
+    .cart-item button {
+      justify-self: center;
+    }
+    .remove-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background-color: #c82333;
+    }
+    .total {
+      text-align: right;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Your Cart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="order.html">Order</a>
+    </nav>
+  </header>
+
+  <div class="container" id="cart-items">
+    <!-- Cart items will be inserted here -->
+  </div>
+
+  <footer>
+    &copy; 2025 Creative Online Shop
+  </footer>
+
+  <script>
+    const cartContainer = document.getElementById('cart-items');
+
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartContainer.innerHTML = ""; // Clear previous items
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        return;
+      }
+
+      // Add header row
+      const header = document.createElement("div");
+      header.className = "cart-header";
+      header.innerHTML = `
+        <span>Product</span>
+        <span>Price</span>
+        <span>Action</span>
+      `;
+      cartContainer.appendChild(header);
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <span>${item.name}</span>
+          <span>₹${item.price}</span>
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        `;
+        cartContainer.appendChild(div);
+        total += item.price;
+      });
+
+      const totalDiv = document.createElement("div");
+      totalDiv.className = "total";
+      totalDiv.textContent = `Total: ₹${total}`;
+      cartContainer.appendChild(totalDiv);
+    }
+
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart(); // Refresh the cart view
+    }
+
+    // Initial load
+    loadCart();
+  </script>
+
+</body>
+</html>
